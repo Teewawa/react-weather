@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
+import FormatDate from "./FormatDate";
 //Structure is based off Google's weather
 
 export default function Weather() {
-  //an object intialized with variable ready="false"
+  //an object initialized with variable ready="false"
   const [weatherData, setWeatherData] = useState({ ready: false });
 
   function handleResponse(response) {
@@ -13,7 +14,7 @@ export default function Weather() {
     setWeatherData({
       ready: true,
       city: response.data.name,
-      date: "Wednesday 07:00",
+      date: new Date(response.data.dt * 1000),
       temperature: response.data.main.temp,
       description: response.data.weather[0].description,
       iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
@@ -46,7 +47,9 @@ export default function Weather() {
         </form>
         <h1>{weatherData.city}</h1>
         <ul>
-          <li>{weatherData.date}</li>
+          <li>
+            <FormatDate date={weatherData.date} />
+          </li>
           <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row mt-3">
