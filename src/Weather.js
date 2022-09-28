@@ -18,7 +18,7 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
       temperature: response.data.main.temp,
       description: response.data.weather[0].description,
-      iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+      icon: response.data.weather[0].icon,
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
     });
@@ -35,6 +35,8 @@ export default function Weather(props) {
   function handleSubmit(event) {
     event.preventDefault();
     search();
+    //Clear our search bar after submit
+    event.target.reset();
   }
 
   function handleCityChange(event) {
