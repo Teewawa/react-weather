@@ -36,7 +36,7 @@
   display: inline-block;
 }
 
-.Weather .temperature {
+.WeatherTemperature .temperature {
   color: rgb(33, 33, 33);
   font-size: 64px;
   font-weight: 400;
@@ -44,11 +44,11 @@
   margin-left: 10px;
 }
 
-.Weather .unit {
+.WeatherTemperature .unit {
   color: rgb(33, 33, 33);
   font-size: 16px;
   font-weight: 400;
   position: relative;
-  top: -20px;
+  top: -30px;
   margin-left: 3px;
 }
