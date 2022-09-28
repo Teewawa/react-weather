@@ -4,9 +4,10 @@ import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
 //Structure is based off Google's weather
 
-export default function Weather() {
+export default function Weather(props) {
   //an object initialized with variable ready="false"
   const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     console.log(response.data);
@@ -23,10 +24,27 @@ export default function Weather() {
     });
   }
 
+  function search() {
+    const apiKey = "a0ba5ae0dd4ffae6cc80c17468df9ce7";
+    let units = "metric";
+    let endpoint = "https://api.openweathermap.org/data/2.5/weather";
+    let apiUrl = `${endpoint}?q=${city}&appid=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="Weather">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-9">
               <input
@@ -34,6 +52,7 @@ export default function Weather() {
                 placeholder="Enter a city..."
                 className="form-control"
                 autoFocus="on"
+                onChange={handleCityChange}
               />
             </div>
             <div className="col-3">
@@ -49,12 +68,7 @@ export default function Weather() {
       </div>
     );
   } else {
-    const apiKey = "a0ba5ae0dd4ffae6cc80c17468df9ce7";
-    let city = "New York";
-    let units = "metric";
-    let endpoint = "https://api.openweathermap.org/data/2.5/weather";
-    let apiUrl = `${endpoint}?q=${city}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse);
+    search();
     return "Loading...";
   }
 }
