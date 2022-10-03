@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
-import WeatherForcast from "./WeatherForecast";
+import WeatherForecast from "./WeatherForecast";
 //Structure is based off Google's weather
 
 export default function Weather(props) {
@@ -15,6 +15,7 @@ export default function Weather(props) {
     //Updating the object
     setWeatherData({
       ready: true,
+      coordinates: response.data.coord,
       city: response.data.name,
       country: response.data.sys.country,
       date: new Date(response.data.dt * 1000),
@@ -69,7 +70,7 @@ export default function Weather(props) {
           </div>
         </form>
         <WeatherInfo data={weatherData} />
-        <WeatherForcast />
+        <WeatherForecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {
