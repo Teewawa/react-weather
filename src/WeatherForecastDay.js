@@ -6,8 +6,13 @@ export default function WeatherForecastDay(props) {
   const unitStore = useStore((state) => state.unitStore);
 
   function maxTemperature() {
-    let temperature = Math.round(props.data.temp.max);
-    return `${temperature}°`;
+    if (unitStore === "celsius") {
+      let temperature = Math.round(props.data.temp.max);
+      return `${temperature}°`;
+    } else {
+      let temperature = Math.round((props.data.temp.max * 9) / 5 + 32);
+      return `${temperature}°`;
+    }
   }
 
   function minTemperature() {
