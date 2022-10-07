@@ -4,7 +4,6 @@ import "./Weather.css";
 
 export default function WeatherTemperature(props) {
   const [unit, setUnit] = useState("celsius");
-  const unitStore = useStore((state) => state.unitStore);
   const unitStoreF = useStore((state) => state.clickF); //Updates unitStore
   const unitStoreC = useStore((state) => state.clickC); //Updates unitStore
 
