@@ -16,8 +16,13 @@ export default function WeatherForecastDay(props) {
   }
 
   function minTemperature() {
-    let temperature = Math.round(props.data.temp.min);
-    return `${temperature}°`;
+    if (unitStore === "celsius") {
+      let temperature = Math.round(props.data.temp.min);
+      return `${temperature}°`;
+    } else {
+      let temperature = Math.round((props.data.temp.min * 9) / 5 + 32);
+      return `${temperature}°`;
+    }
   }
 
   function day() {
