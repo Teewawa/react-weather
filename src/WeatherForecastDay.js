@@ -1,7 +1,10 @@
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
+import { useStore } from "./unitStore";
 
 export default function WeatherForecastDay(props) {
+  const unitStore = useStore((state) => state.unitStore);
+
   function maxTemperature() {
     let temperature = Math.round(props.data.temp.max);
     return `${temperature}°`;
